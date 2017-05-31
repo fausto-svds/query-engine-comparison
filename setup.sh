@@ -46,6 +46,5 @@ do
 done
 
 hive -f /hive.ddl.sql
-# TODO use more robust Spark CSV to create Parquet and Avro tables instead of Hive DDL
 
 exec bash
