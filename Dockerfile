@@ -1,7 +1,8 @@
 FROM cloudera/quickstart
 
-COPY hive.ddl.sql /
-COPY setup.sh /
+COPY *.sql /
+COPY *.sh /
+COPY *.py /
 
 EXPOSE 80 4040 7180 8888 10000
 
