@@ -1,5 +1,20 @@
 #! /usr/bin/env bash
 
+# Extract data
+
+# HTML parser & wget installation
+#yum install -y go wget
+#export GOPATH=/go
+#mkdir -p $GOPATH
+#go get github.com/ericchiang/pup
+#PATH=$GOPATH/bin:$PATH
+#URL=`curl -L https://goo.gl/CAUIEE | pup 'a.ic-btn attr{href}'`
+#wget ${URL}
+
+# NOTE: /data needs to be owned by user running Docker
+tar xvzf /data/*.tar.gz -C /data/
+mv /data/**/*.csv /data/
+
 DAEMONS="\
     mysqld \
     cloudera-quickstart-init"
@@ -43,8 +58,10 @@ done
 for subdirectory in "orders" "products" "order_products__prior"
 do
     hadoop fs -mkdir -p /user/cloudera/instacart/${subdirectory}
+    hadoop fs -put /data/${subdirectory}.csv /user/cloudera/instacart/${subdirectory}/${subdirectory}.csv
 done
 
 hive -f /hive.ddl.sql
+/formats.sh
 
 exec bash
