@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/bin/bash -e
 
 # Extract data
 
@@ -11,7 +11,7 @@
 #URL=`curl -L https://goo.gl/CAUIEE | pup 'a.ic-btn attr{href}'`
 #wget ${URL}
 
-# NOTE: /data needs to be owned by user running Docker
+# NOTE: /data in Docker host's file system needs to be owned by user running Docker
 tar xvzf /data/*.tar.gz -C /data/
 mv /data/**/*.csv /data/
 
